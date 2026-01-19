@@ -119,22 +119,67 @@ section h2 {
   color: #a855f7;
 }
 
+/* ================= ABOUT ================= */
+
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
 }
 
-.about-card,
-.skill-box,
-.project,
-.certificate {
+/* ===== NEW HOVER EFFECT ===== */
+
+.about-card {
+  position: relative;
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(168,85,247,.4);
+  padding: 35px;
+  border-radius: 22px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    #7c3aed,
+    #ec4899,
+    #a855f7
+  );
+  background-size: 300% 300%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.about-card:hover::before {
+  opacity: 1;
+  animation: gradientFlow 4s ease infinite;
+}
+
+.about-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.about-card:hover {
+  transform: translateY(-14px) scale(1.04);
+  box-shadow:
+    0 0 30px rgba(168,85,247,0.6),
+    0 0 70px rgba(236,72,153,0.5);
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ================= GRID SECTIONS ================= */
 
 .skills,
 .projects,
@@ -144,12 +189,22 @@ section h2 {
   gap: 30px;
 }
 
+.skill-box,
+.project,
+.certificate {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(168,85,247,.4);
+  transition: .3s;
+}
+
 .skill-box:hover,
 .project:hover,
 .certificate:hover {
   transform: translateY(-10px);
   box-shadow: 0 0 50px #a855f7;
-  transition: .3s;
 }
 
 footer {
@@ -157,6 +212,8 @@ footer {
   padding: 40px;
   background: #06000a;
 }
+
+/* ================= MOBILE ================= */
 
 @media(max-width:900px){
   section { padding: 80px 25px; }
@@ -169,7 +226,6 @@ footer {
 
 <body>
 
-<!-- NEURAL NETWORK BACKGROUND -->
 <canvas id="neural-canvas"></canvas>
 
 <nav>
@@ -195,12 +251,15 @@ footer {
 <section id="about">
 <h2>About Me</h2>
 <div class="about">
+
   <div class="about-card">
     I am Tarun Kumar E, pursuing BCA in Data Science at SRM Institute of Science and Technology.
   </div>
+
   <div class="about-card">
     Passionate about data analytics, visualization, and machine learning.
   </div>
+
 </div>
 </section>
 
@@ -248,78 +307,69 @@ footer {
 
 <script>
 
-/* ================= TYPING ================= */
-
-const texts = [
+/* typing */
+const texts=[
   "Transforming data into insights",
   "Power BI • SQL • Python",
   "Machine Learning Enthusiast",
   "Data-Driven Thinker"
 ];
 
-let i = 0, j = 0, del = false;
-const el = document.getElementById("typing");
+let i=0,j=0,del=false;
+const el=document.getElementById("typing");
 
-function type() {
-  el.textContent = texts[i].substring(0, j);
-  if (!del && j < texts[i].length) j++;
-  else if (del && j > 0) j--;
-  else { del = !del; if (!del) i = (i + 1) % texts.length; }
-  setTimeout(type, del ? 60 : 100);
-}
-type();
+(function type(){
+  el.textContent=texts[i].substring(0,j);
+  if(!del && j<texts[i].length) j++;
+  else if(del && j>0) j--;
+  else{del=!del;if(!del)i=(i+1)%texts.length;}
+  setTimeout(type,del?60:100);
+})();
 
-/* ================= NEURAL NETWORK ================= */
+/* neural background */
+const canvas=document.getElementById("neural-canvas");
+const ctx=canvas.getContext("2d");
 
-const canvas = document.getElementById("neural-canvas");
-const ctx = canvas.getContext("2d");
-
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+function resize(){
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
 }
 resize();
-window.addEventListener("resize", resize);
+addEventListener("resize",resize);
 
-const nodes = Array.from({ length: 90 }, () => ({
-  x: Math.random() * canvas.width,
-  y: Math.random() * canvas.height,
-  vx: (Math.random() - 0.5) * 0.5,
-  vy: (Math.random() - 0.5) * 0.5
+const nodes=[...Array(90)].map(()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  vx:(Math.random()-.5)*.5,
+  vy:(Math.random()-.5)*.5
 }));
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  nodes.forEach(n => {
-    n.x += n.vx;
-    n.y += n.vy;
-
-    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
-    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
-
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  nodes.forEach(n=>{
+    n.x+=n.vx;n.y+=n.vy;
+    if(n.x<0||n.x>canvas.width) n.vx*=-1;
+    if(n.y<0||n.y>canvas.height) n.vy*=-1;
     ctx.beginPath();
-    ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
-    ctx.fillStyle = "#a855f7";
+    ctx.arc(n.x,n.y,2,0,Math.PI*2);
+    ctx.fillStyle="#a855f7";
     ctx.fill();
   });
 
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const dx = nodes[i].x - nodes[j].x;
-      const dy = nodes[i].y - nodes[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < 130) {
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      let dx=nodes[i].x-nodes[j].x;
+      let dy=nodes[i].y-nodes[j].y;
+      let d=Math.sqrt(dx*dx+dy*dy);
+      if(d<130){
         ctx.beginPath();
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
-        ctx.strokeStyle = "rgba(168,85,247,0.25)";
+        ctx.moveTo(nodes[i].x,nodes[i].y);
+        ctx.lineTo(nodes[j].x,nodes[j].y);
+        ctx.strokeStyle="rgba(168,85,247,0.25)";
         ctx.stroke();
       }
     }
   }
-
   requestAnimationFrame(animate);
 }
 animate();
@@ -328,5 +378,6 @@ animate();
 
 </body>
 </html>
+
 
 
