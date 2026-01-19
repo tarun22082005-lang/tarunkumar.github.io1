@@ -9,28 +9,26 @@
 
 <style>
 
-/* ================= BASE ================= */
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  background: linear-gradient(-45deg,#050008,#12001f,#1a0033,#050008);
-  background-size: 400% 400%;
-  animation: bgMove 20s ease infinite;
-  color: #ffffff;
+  background: #050008;
+  color: white;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* ================= NEURAL NETWORK BACKGROUND ================= */
+
+#neural-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
 }
 
 /* ================= NAV ================= */
@@ -76,17 +74,12 @@ nav a:hover {
   text-align: center;
 }
 
-.hero-content {
-  animation: heroEnter 1.2s ease forwards;
-}
-
 .hero-name {
   font-size: 90px;
   font-weight: 800;
   background: linear-gradient(90deg,#9333ea,#a855f7,#ec4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 40px rgba(168,85,247,.6);
 }
 
 .hero-name span {
@@ -94,24 +87,17 @@ nav a:hover {
   -webkit-text-fill-color: white;
 }
 
-.hero-sub {
-  color: #c084fc;
-  margin: 15px 0;
-  font-size: 20px;
-}
-
 .typing {
-  margin-top: 20px;
+  margin: 25px 0;
   font-size: 20px;
-  color: #d8b4fe;
+  color: #c084fc;
 }
 
 .btn-glow {
-  margin-top: 35px;
-  border: 2px solid #a855f7;
   background: transparent;
-  color: #fff;
-  padding: 12px 34px;
+  border: 2px solid #a855f7;
+  color: white;
+  padding: 12px 32px;
   border-radius: 30px;
   cursor: pointer;
   box-shadow: 0 0 18px #9333ea;
@@ -119,18 +105,6 @@ nav a:hover {
 
 .btn-glow:hover {
   background: #9333ea;
-  box-shadow: 0 0 40px #a855f7;
-}
-
-@keyframes heroEnter {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ================= SECTIONS ================= */
@@ -157,12 +131,10 @@ section h2 {
 .certificate {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
-  border-radius: 20px;
   padding: 30px;
+  border-radius: 20px;
   box-shadow: 0 0 25px rgba(168,85,247,.4);
 }
-
-/* grids */
 
 .skills,
 .projects,
@@ -172,12 +144,12 @@ section h2 {
   gap: 30px;
 }
 
-.project:hover,
 .skill-box:hover,
+.project:hover,
 .certificate:hover {
   transform: translateY(-10px);
-  transition: .3s;
   box-shadow: 0 0 50px #a855f7;
+  transition: .3s;
 }
 
 footer {
@@ -186,17 +158,9 @@ footer {
   background: #06000a;
 }
 
-/* ================= PARTICLES ================= */
-
-canvas#particles {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
-
 @media(max-width:900px){
-  .hero-name { font-size: 52px; }
   section { padding: 80px 25px; }
+  .hero-name { font-size: 52px; }
   .about { grid-template-columns: 1fr; }
 }
 
@@ -205,7 +169,8 @@ canvas#particles {
 
 <body>
 
-<canvas id="particles"></canvas>
+<!-- NEURAL NETWORK BACKGROUND -->
+<canvas id="neural-canvas"></canvas>
 
 <nav>
   <h2>Portfolio</h2>
@@ -219,34 +184,25 @@ canvas#particles {
   </ul>
 </nav>
 
-<!-- ================= HERO ================= -->
-
 <section class="hero" id="home">
-  <div class="hero-content">
+  <div>
     <h1 class="hero-name">Tarun Kumar <span>E</span></h1>
-    <p class="hero-sub">Data Science • Analytics • Machine Learning</p>
     <div class="typing" id="typing"></div>
     <button class="btn-glow">Download Resume</button>
   </div>
 </section>
 
-<!-- ================= ABOUT ================= -->
-
 <section id="about">
 <h2>About Me</h2>
 <div class="about">
   <div class="about-card">
-    I am pursuing BCA in Data Science at SRM Institute of Science and Technology.
-    Passionate about transforming raw data into meaningful insights.
+    I am Tarun Kumar E, pursuing BCA in Data Science at SRM Institute of Science and Technology.
   </div>
   <div class="about-card">
-    Skilled in Python, SQL, Power BI, Machine Learning and Analytics.
-    I enjoy solving real-world business problems using data.
+    Passionate about data analytics, visualization, and machine learning.
   </div>
 </div>
 </section>
-
-<!-- ================= SKILLS ================= -->
 
 <section id="skills">
 <h2>Skills</h2>
@@ -260,32 +216,26 @@ canvas#particles {
 </div>
 </section>
 
-<!-- ================= PROJECTS ================= -->
-
 <section id="projects">
 <h2>Projects</h2>
 <div class="projects">
-  <div class="project">Heart Disease Analysis Dashboard</div>
-  <div class="project">Netflix Content Analysis</div>
-  <div class="project">Spotify Music Dashboard</div>
-  <div class="project">Sales Performance Analysis</div>
+  <div class="project">Heart Disease Dashboard</div>
+  <div class="project">Netflix Power BI Analysis</div>
+  <div class="project">Spotify Music Insights</div>
+  <div class="project">Sales Dashboard</div>
   <div class="project">Customer Churn Prediction</div>
 </div>
 </section>
-
-<!-- ================= CERTIFICATES ================= -->
 
 <section id="certificates">
 <h2>Certificates</h2>
 <div class="certificates">
   <div class="certificate">Google Data Analytics</div>
   <div class="certificate">AWS Generative AI Foundations</div>
-  <div class="certificate">Exploratory Data Analysis</div>
+  <div class="certificate">EDA – Great Learning</div>
   <div class="certificate">TATA Data Analytics – Forage</div>
 </div>
 </section>
-
-<!-- ================= CONTACT ================= -->
 
 <section id="contact">
 <h2>Contact</h2>
@@ -298,53 +248,78 @@ canvas#particles {
 
 <script>
 
-/* typing */
+/* ================= TYPING ================= */
+
 const texts = [
   "Transforming data into insights",
   "Power BI • SQL • Python",
   "Machine Learning Enthusiast",
-  "Data-Driven Problem Solver"
+  "Data-Driven Thinker"
 ];
 
-let i=0,j=0,del=false;
-const el=document.getElementById("typing");
+let i = 0, j = 0, del = false;
+const el = document.getElementById("typing");
 
-function type(){
-  el.textContent=texts[i].substring(0,j);
-  if(!del && j<texts[i].length) j++;
-  else if(del && j>0) j--;
-  else { del=!del; if(!del) i=(i+1)%texts.length; }
-  setTimeout(type,del?60:100);
+function type() {
+  el.textContent = texts[i].substring(0, j);
+  if (!del && j < texts[i].length) j++;
+  else if (del && j > 0) j--;
+  else { del = !del; if (!del) i = (i + 1) % texts.length; }
+  setTimeout(type, del ? 60 : 100);
 }
 type();
 
-/* particles */
-const c=document.getElementById("particles");
-const ctx=c.getContext("2d");
+/* ================= NEURAL NETWORK ================= */
 
-function resize(){ c.width=innerWidth; c.height=innerHeight; }
+const canvas = document.getElementById("neural-canvas");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
 resize();
-addEventListener("resize",resize);
+window.addEventListener("resize", resize);
 
-const p=[...Array(80)].map(()=>({
-  x:Math.random()*c.width,
-  y:Math.random()*c.height,
-  vx:(Math.random()-.5)*.4,
-  vy:(Math.random()-.5)*.4,
-  r:Math.random()*2+1
+const nodes = Array.from({ length: 90 }, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  vx: (Math.random() - 0.5) * 0.5,
+  vy: (Math.random() - 0.5) * 0.5
 }));
 
-function animate(){
-  ctx.clearRect(0,0,c.width,c.height);
-  p.forEach(a=>{
-    a.x+=a.vx; a.y+=a.vy;
-    if(a.x<0||a.x>c.width) a.vx*=-1;
-    if(a.y<0||a.y>c.height) a.vy*=-1;
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  nodes.forEach(n => {
+    n.x += n.vx;
+    n.y += n.vy;
+
+    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
     ctx.beginPath();
-    ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
-    ctx.fillStyle="#a855f7";
+    ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+    ctx.fillStyle = "#a855f7";
     ctx.fill();
   });
+
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 130) {
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = "rgba(168,85,247,0.25)";
+        ctx.stroke();
+      }
+    }
+  }
+
   requestAnimationFrame(animate);
 }
 animate();
@@ -353,4 +328,5 @@ animate();
 
 </body>
 </html>
+
 
