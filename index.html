@@ -9,53 +9,6 @@
 
 <style>
 
-/* ================= INTRO ================= */
-
-.intro {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, #12001f, #050008);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  overflow: hidden;
-  animation: introFade 4s forwards;
-}
-
-.intro-content {
-  text-align: center;
-  z-index: 2;
-}
-
-.intro-name {
-  font-size: 80px;
-  font-weight: 800;
-  background: linear-gradient(90deg,#9333ea,#a855f7,#ec4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 50px rgba(168,85,247,.9);
-}
-
-.intro-tagline {
-  margin-top: 15px;
-  font-size: 22px;
-  color: #c084fc;
-  letter-spacing: 2px;
-}
-
-#intro-network {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-@keyframes introFade {
-  0% { opacity: 1; }
-  85% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
-}
-
 /* ================= BASE ================= */
 
 * {
@@ -71,30 +24,13 @@ body {
   animation: bgMove 20s ease infinite;
   color: #ffffff;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 @keyframes bgMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-}
-
-.glow {
-  text-shadow: 0 0 10px #a855f7;
-}
-
-.btn-glow {
-  border: 2px solid #a855f7;
-  background: transparent;
-  color: #fff;
-  padding: 12px 30px;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 0 15px #9333ea;
-}
-
-.btn-glow:hover {
-  background: #9333ea;
 }
 
 /* ================= NAV ================= */
@@ -111,15 +47,23 @@ nav {
   z-index: 100;
 }
 
+nav h2 {
+  color: #a855f7;
+}
+
 nav ul {
-  list-style: none;
   display: flex;
   gap: 30px;
+  list-style: none;
 }
 
 nav a {
   text-decoration: none;
   color: #fff;
+}
+
+nav a:hover {
+  color: #a855f7;
 }
 
 /* ================= HERO ================= */
@@ -132,23 +76,61 @@ nav a {
   text-align: center;
 }
 
+.hero-content {
+  animation: heroEnter 1.2s ease forwards;
+}
+
 .hero-name {
   font-size: 90px;
   font-weight: 800;
   background: linear-gradient(90deg,#9333ea,#a855f7,#ec4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(168,85,247,.6);
 }
 
-.hero span {
-  color: #fff;
-  -webkit-text-fill-color: #fff;
+.hero-name span {
+  color: white;
+  -webkit-text-fill-color: white;
+}
+
+.hero-sub {
+  color: #c084fc;
+  margin: 15px 0;
+  font-size: 20px;
 }
 
 .typing {
-  margin: 25px 0;
+  margin-top: 20px;
   font-size: 20px;
-  color: #c084fc;
+  color: #d8b4fe;
+}
+
+.btn-glow {
+  margin-top: 35px;
+  border: 2px solid #a855f7;
+  background: transparent;
+  color: #fff;
+  padding: 12px 34px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 18px #9333ea;
+}
+
+.btn-glow:hover {
+  background: #9333ea;
+  box-shadow: 0 0 40px #a855f7;
+}
+
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ================= SECTIONS ================= */
@@ -163,19 +145,39 @@ section h2 {
   color: #a855f7;
 }
 
-.skills, .projects, .certificates {
+.about {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.about-card,
+.skill-box,
+.project,
+.certificate {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 25px rgba(168,85,247,.4);
+}
+
+/* grids */
+
+.skills,
+.projects,
+.certificates {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
   gap: 30px;
 }
 
-.skill-box, .project, .certificate {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 0 25px rgba(168,85,247,.4);
+.project:hover,
+.skill-box:hover,
+.certificate:hover {
+  transform: translateY(-10px);
+  transition: .3s;
+  box-shadow: 0 0 50px #a855f7;
 }
 
 footer {
@@ -184,6 +186,8 @@ footer {
   background: #06000a;
 }
 
+/* ================= PARTICLES ================= */
+
 canvas#particles {
   position: fixed;
   inset: 0;
@@ -191,8 +195,9 @@ canvas#particles {
 }
 
 @media(max-width:900px){
-  section{padding:80px 25px}
-  .hero-name{font-size:52px}
+  .hero-name { font-size: 52px; }
+  section { padding: 80px 25px; }
+  .about { grid-template-columns: 1fr; }
 }
 
 </style>
@@ -200,19 +205,10 @@ canvas#particles {
 
 <body>
 
-<!-- ===== INTRO ===== -->
-<div class="intro">
-  <div class="intro-content">
-    <h1 class="intro-name">Tarun Kumar</h1>
-    <p class="intro-tagline">Data Science • Analytics • Machine Learning</p>
-  </div>
-  <canvas id="intro-network"></canvas>
-</div>
-
 <canvas id="particles"></canvas>
 
 <nav>
-  <h2 class="glow">Portfolio</h2>
+  <h2>Portfolio</h2>
   <ul>
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
@@ -223,54 +219,73 @@ canvas#particles {
   </ul>
 </nav>
 
+<!-- ================= HERO ================= -->
+
 <section class="hero" id="home">
-  <div>
+  <div class="hero-content">
     <h1 class="hero-name">Tarun Kumar <span>E</span></h1>
+    <p class="hero-sub">Data Science • Analytics • Machine Learning</p>
     <div class="typing" id="typing"></div>
     <button class="btn-glow">Download Resume</button>
   </div>
 </section>
 
+<!-- ================= ABOUT ================= -->
+
 <section id="about">
 <h2>About Me</h2>
-<p>
-I am a BCA Data Science student passionate about analytics,
-machine learning and business intelligence.
-</p>
+<div class="about">
+  <div class="about-card">
+    I am pursuing BCA in Data Science at SRM Institute of Science and Technology.
+    Passionate about transforming raw data into meaningful insights.
+  </div>
+  <div class="about-card">
+    Skilled in Python, SQL, Power BI, Machine Learning and Analytics.
+    I enjoy solving real-world business problems using data.
+  </div>
+</div>
 </section>
+
+<!-- ================= SKILLS ================= -->
 
 <section id="skills">
 <h2>Skills</h2>
 <div class="skills">
-<div class="skill-box">Python</div>
-<div class="skill-box">SQL</div>
-<div class="skill-box">Power BI</div>
-<div class="skill-box">Tableau</div>
-<div class="skill-box">Machine Learning</div>
-<div class="skill-box">AWS</div>
+  <div class="skill-box">Python</div>
+  <div class="skill-box">SQL</div>
+  <div class="skill-box">Power BI</div>
+  <div class="skill-box">Tableau</div>
+  <div class="skill-box">Machine Learning</div>
+  <div class="skill-box">AWS</div>
 </div>
 </section>
+
+<!-- ================= PROJECTS ================= -->
 
 <section id="projects">
 <h2>Projects</h2>
 <div class="projects">
-<div class="project">Heart Disease Analysis Dashboard</div>
-<div class="project">Netflix Power BI Dashboard</div>
-<div class="project">Spotify Analytics Dashboard</div>
-<div class="project">Sales Analysis Dashboard</div>
-<div class="project">Customer Churn Prediction</div>
+  <div class="project">Heart Disease Analysis Dashboard</div>
+  <div class="project">Netflix Content Analysis</div>
+  <div class="project">Spotify Music Dashboard</div>
+  <div class="project">Sales Performance Analysis</div>
+  <div class="project">Customer Churn Prediction</div>
 </div>
 </section>
+
+<!-- ================= CERTIFICATES ================= -->
 
 <section id="certificates">
 <h2>Certificates</h2>
 <div class="certificates">
-<div class="certificate">Google Data Analytics</div>
-<div class="certificate">AWS Generative AI</div>
-<div class="certificate">EDA – Great Learning</div>
-<div class="certificate">TATA Data Analytics – Forage</div>
+  <div class="certificate">Google Data Analytics</div>
+  <div class="certificate">AWS Generative AI Foundations</div>
+  <div class="certificate">Exploratory Data Analysis</div>
+  <div class="certificate">TATA Data Analytics – Forage</div>
 </div>
 </section>
+
+<!-- ================= CONTACT ================= -->
 
 <section id="contact">
 <h2>Contact</h2>
@@ -282,18 +297,60 @@ machine learning and business intelligence.
 </footer>
 
 <script>
-/* particles + typing */
-const texts=["Data Analyst","Machine Learning Enthusiast","Power BI Developer"];
+
+/* typing */
+const texts = [
+  "Transforming data into insights",
+  "Power BI • SQL • Python",
+  "Machine Learning Enthusiast",
+  "Data-Driven Problem Solver"
+];
+
 let i=0,j=0,del=false;
 const el=document.getElementById("typing");
-(function type(){
+
+function type(){
   el.textContent=texts[i].substring(0,j);
   if(!del && j<texts[i].length) j++;
   else if(del && j>0) j--;
-  else{del=!del;if(!del)i=(i+1)%texts.length;}
+  else { del=!del; if(!del) i=(i+1)%texts.length; }
   setTimeout(type,del?60:100);
-})();
+}
+type();
+
+/* particles */
+const c=document.getElementById("particles");
+const ctx=c.getContext("2d");
+
+function resize(){ c.width=innerWidth; c.height=innerHeight; }
+resize();
+addEventListener("resize",resize);
+
+const p=[...Array(80)].map(()=>({
+  x:Math.random()*c.width,
+  y:Math.random()*c.height,
+  vx:(Math.random()-.5)*.4,
+  vy:(Math.random()-.5)*.4,
+  r:Math.random()*2+1
+}));
+
+function animate(){
+  ctx.clearRect(0,0,c.width,c.height);
+  p.forEach(a=>{
+    a.x+=a.vx; a.y+=a.vy;
+    if(a.x<0||a.x>c.width) a.vx*=-1;
+    if(a.y<0||a.y>c.height) a.vy*=-1;
+    ctx.beginPath();
+    ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
+    ctx.fillStyle="#a855f7";
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
 </script>
 
 </body>
 </html>
+
