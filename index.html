@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tarun Kumar | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= INTRO ================= */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #12001f, #050008);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+  animation: introFade 4s forwards;
+}
+
+.intro-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.intro-name {
+  font-size: 80px;
+  font-weight: 800;
+  background: linear-gradient(90deg,#9333ea,#a855f7,#ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 50px rgba(168,85,247,.9);
+}
+
+.intro-tagline {
+  margin-top: 15px;
+  font-size: 22px;
+  color: #c084fc;
+  letter-spacing: 2px;
+}
+
+#intro-network {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+@keyframes introFade {
+  0% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* ================= BASE ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(-45deg,#050008,#12001f,#1a0033,#050008);
+  background-size: 400% 400%;
+  animation: bgMove 20s ease infinite;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.glow {
+  text-shadow: 0 0 10px #a855f7;
+}
+
+.btn-glow {
+  border: 2px solid #a855f7;
+  background: transparent;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #9333ea;
+}
+
+.btn-glow:hover {
+  background: #9333ea;
+}
+
+/* ================= NAV ================= */
+
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-name {
+  font-size: 90px;
+  font-weight: 800;
+  background: linear-gradient(90deg,#9333ea,#a855f7,#ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero span {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
+
+.typing {
+  margin: 25px 0;
+  font-size: 20px;
+  color: #c084fc;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+  padding: 100px 80px;
+}
+
+section h2 {
+  font-size: 40px;
+  margin-bottom: 40px;
+  color: #a855f7;
+}
+
+.skills, .projects, .certificates {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.skill-box, .project, .certificate {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(168,85,247,.4);
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  background: #06000a;
+}
+
+canvas#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+@media(max-width:900px){
+  section{padding:80px 25px}
+  .hero-name{font-size:52px}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== INTRO ===== -->
+<div class="intro">
+  <div class="intro-content">
+    <h1 class="intro-name">Tarun Kumar</h1>
+    <p class="intro-tagline">Data Science • Analytics • Machine Learning</p>
+  </div>
+  <canvas id="intro-network"></canvas>
+</div>
+
+<canvas id="particles"></canvas>
+
+<nav>
+  <h2 class="glow">Portfolio</h2>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div>
+    <h1 class="hero-name">Tarun Kumar <span>E</span></h1>
+    <div class="typing" id="typing"></div>
+    <button class="btn-glow">Download Resume</button>
+  </div>
+</section>
+
+<section id="about">
+<h2>About Me</h2>
+<p>
+I am a BCA Data Science student passionate about analytics,
+machine learning and business intelligence.
+</p>
+</section>
+
+<section id="skills">
+<h2>Skills</h2>
+<div class="skills">
+<div class="skill-box">Python</div>
+<div class="skill-box">SQL</div>
+<div class="skill-box">Power BI</div>
+<div class="skill-box">Tableau</div>
+<div class="skill-box">Machine Learning</div>
+<div class="skill-box">AWS</div>
+</div>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="projects">
+<div class="project">Heart Disease Analysis Dashboard</div>
+<div class="project">Netflix Power BI Dashboard</div>
+<div class="project">Spotify Analytics Dashboard</div>
+<div class="project">Sales Analysis Dashboard</div>
+<div class="project">Customer Churn Prediction</div>
+</div>
+</section>
+
+<section id="certificates">
+<h2>Certificates</h2>
+<div class="certificates">
+<div class="certificate">Google Data Analytics</div>
+<div class="certificate">AWS Generative AI</div>
+<div class="certificate">EDA – Great Learning</div>
+<div class="certificate">TATA Data Analytics – Forage</div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: tarun22082005@gmail.com</p>
+</section>
+
+<footer>
+© 2026 Tarun Kumar
+</footer>
+
+<script>
+/* particles + typing */
+const texts=["Data Analyst","Machine Learning Enthusiast","Power BI Developer"];
+let i=0,j=0,del=false;
+const el=document.getElementById("typing");
+(function type(){
+  el.textContent=texts[i].substring(0,j);
+  if(!del && j<texts[i].length) j++;
+  else if(del && j>0) j--;
+  else{del=!del;if(!del)i=(i+1)%texts.length;}
+  setTimeout(type,del?60:100);
+})();
+</script>
+
+</body>
+</html>
